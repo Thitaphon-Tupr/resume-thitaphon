@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+:root{
+  --bg:#0a0a0b;       /* พื้นหลังดาร์ก */
+  --panel:#111214;    /* กล่องคอนเทนต์ */
+  --soft:#17181b;     /* แถบ/ฟุตเตอร์ */
+  --muted:#a7abb3;    /* ตัวอักษรจาง */
+  --brand:#f0b86e;    /* ไฮไลต์โทนทองอุ่น */
+  --white:#fff;
+}
+
+html,body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+img{max-width:100%;height:auto}
+a{text-decoration:none}
+
+/* Navbar */
+.navbar{background:rgba(11,11,12,.7);backdrop-filter:blur(6px);border-bottom:1px solid #1e1f23}
+.navbar .nav-link{color:#dfe3ea}
+.navbar .nav-link.active{color:var(--white);position:relative}
+.navbar .nav-link.active::after{content:"";position:absolute;left:.5rem;right:.5rem;bottom:.3rem;height:2px;background:var(--brand);border-radius:2px}
+.btn-brand{background:var(--brand);color:#0a0a0a;border:0;font-weight:700}
+.btn-brand:hover{filter:brightness(1.05)}
+
+/* Sections / cards */
+.section{padding-block:64px}
+.card-dark{background:var(--panel);border:1px solid #1d2026;border-radius:18px}
+.shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.muted{color:var(--muted)}
+.about-title{font-weight:800;font-size:clamp(26px,3.2vw,40px)}
+
+/* Hero */
+.hero{position:relative;min-height:48vh;display:grid;place-items:center;text-align:center}
+.hero h1{font-weight:800;letter-spacing:.5px;font-size:clamp(34px,5vw,56px)}
+.hero .breadcrumb{--bs-breadcrumb-divider:'›'}
+.hero .breadcrumb a{color:#c9ced6}.hero .breadcrumb .active{color:#8d94a1}
+
+/* Grid helper */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:991.98px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:575.98px){.grid-3{grid-template-columns:1fr}}
+
+/* Skills */
+.skill .label{display:flex;justify-content:space-between;font-weight:600}
+.progress{height:6px;background:#24262c}.progress-bar{background:var(--brand)}
+
+/* Chips */
+.rounded-16{border-radius:16px}
+.badge-soft{background:#1d2130;color:#cfd3db;border:1px solid #262a38}
+
+/* Footer */
+footer{background:var(--soft);border-top:1px solid #1e1f23}
+.footer-link{color:#cfd3db}.footer-link:hover{color:var(--white)}
+.brand-badge{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.5px}
+.brand-badge i{font-size:26px;color:var(--brand)}

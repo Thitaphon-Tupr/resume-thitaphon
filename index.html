@@ -1,209 +1,167 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thitaphon Tupreang | Resume</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home | Thitaphon Portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/style.css?v=4" rel="stylesheet">
+
+  <!-- Theme (เหมือนทุกหน้า) -->
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f3f3f3;
-      color: #222;
+    :root{ --bg:#0a0a0b; --panel:#111214; --soft:#17181b;
+           --muted:#a7abb3; --brand:#f0b86e; --white:#fff; }
+    html,body{background:var(--bg)!important;color:var(--white)!important;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{text-decoration:none} img{max-width:100%;height:auto}
+
+    /* Navbar แบบเดียวทุกหน้า */
+    .navbar{background:rgba(11,11,12,.7);backdrop-filter:blur(6px);border-bottom:1px solid #1e1f23}
+    .navbar .nav-link{color:#dfe3ea}
+    .navbar .nav-link.active{color:#fff;position:relative}
+    .navbar .nav-link.active::after{
+      content:"";position:absolute;left:.5rem;right:.5rem;bottom:.3rem;height:2px;
+      background:var(--brand);border-radius:2px}
+    .btn-brand{background:var(--brand);color:#0a0a0a;border:0;font-weight:700}
+    .btn-brand:hover{filter:brightness(1.05)}
+
+    /* Layout */
+    .section{padding-block:64px}
+    .card-dark{background:var(--panel);border:1px solid #1d2026;border-radius:18px}
+    .shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .muted{color:var(--muted)}
+    .rounded-16{border-radius:16px}
+    .about-title{font-weight:800;font-size:clamp(26px,3.2vw,40px)}
+
+    /* Hero */
+    .hero{position:relative;min-height:48vh;display:grid;place-items:center;text-align:center}
+    .hero h1{font-weight:800;letter-spacing:.5px;font-size:clamp(34px,5vw,56px)}
+    .hero .breadcrumb{--bs-breadcrumb-divider:'›'}
+    .hero .breadcrumb a{color:#c9ced6}.hero .breadcrumb .active{color:#8d94a1}
+    .hero.home{
+      background:
+        linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.85)),
+        url('https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
     }
-    header {
-      background: white;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #ccc;
-      flex-wrap: wrap;
-    }
-    .logo h1 {
-      margin: 0;
-      font-size: 24px;
-      color: #000;
-    }
-    .nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #444;
-    }
-    .nav a.active {
-      border-bottom: 2px solid royalblue;
-    }
-    .section-title {
-      text-align: center;
-      padding: 40px 0 20px;
-      font-size: 36px;
-      font-weight: bold;
-    }
-    .section-subtitle {
-      font-size: 28px;
-      font-weight: bold;
-      margin: 20px 0 10px;
-      color: #333;
-    }
-    .resume-section {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      padding: 20px 10%;
-    }
-    .resume-card {
-      display: flex;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .resume-card img {
-      width: 200px;
-      height: 100%;
-      object-fit: cover;
-    }
-    .resume-content {
-      padding: 20px;
-      flex: 1;
-    }
-    .resume-content h4 {
-      font-weight: bold;
-      color: royalblue;
-    }
-    .skillset-card {
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      padding: 30px;
-    }
-    .skillset-card h4 {
-      color: royalblue;
-      margin-bottom: 10px;
-    }
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .skills-grid div {
-      width: calc(33.33% - 20px);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .skills-grid div::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      background: royalblue;
-      display: inline-block;
-    }
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-      margin-top: 40px;
-    }
+
+    /* Grid */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    @media (max-width:991.98px){.grid-2{grid-template-columns:1fr}
+                                .grid-3{grid-template-columns:1fr}}
+
+    /* Skills */
+    .skill .label{display:flex;justify-content:space-between;font-weight:600}
+    .progress{height:6px;background:#24262c}.progress-bar{background:var(--brand)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <h1>Thitaphon Tupreang</h1>
-      <span style="font-size: 14px; color: #555">Frontend & IT Support</span>
+
+<!-- NAVBAR (จำนวนเมนูเท่านี้ทุกหน้า) -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html">
+      <i class="bi bi-film" style="color:var(--brand);font-size:1.5rem"></i> THITAPHON
+    </a>
+    <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <i class="bi bi-list" style="font-size:1.8rem"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto gap-lg-2 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+        <li class="nav-item"><a class="nav-link" href="certification.html">Certification</a></li>
+        <li class="ms-lg-3"><a class="btn btn-sm btn-brand rounded-pill px-3" href="contact.html">Contact</a></li>
+      </ul>
     </div>
-    <nav class="nav">
-      <a href="about.html">ABOUT ME</a>
-      <a href="resume.html" class="active">RESUME</a>
-      <a href="projects.html">PROJECTS</a>
-      <a href="activities.html">ACTIVITIES</a>
-      <a href="certification.html">CERTIFICATION</a>
-      <a href="contact.html">CONTACT</a>
+  </div>
+</nav>
+
+<!-- HERO (สไตล์เหมือนเทมเพลต) -->
+<header class="hero home">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-2">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item active">Home</li>
+      </ol>
     </nav>
-  </header>
+    <h1>About Me</h1>
+  </div>
+</header>
 
-  <div class="section-title">Resume</div>
-
-  <section class="resume-section">
-    <div class="section-subtitle">Experience</div>
-    <div class="resume-card">
-      <img src="https://i.postimg.cc/66zBHrmW/IMG-6374.jpg" alt="Internship">
-      <div class="resume-content">
-        <h4>Data Analyst, The Cas Education (formerly Light House)</h4>
-          <p>Analyzed data for the Dream Camp project, focusing on participant feedback and activity outcomes. 
-            Supported strategic planning through data-driven insights and helped improve future camp experiences.</p>
-          <a href="https://www.instagram.com/the.cas.education?utm_source=ig_web_button_share_sheet&igsh=MXcya21sM2lhdGRkag==" target="_blank" style="color: royalblue; text-decoration: none; display: inline-block; margin-top: 10px;">
-            📸 The Cas Education</a>
+<!-- 01 Intro (ภาพซ้าย/ข้อความขวา) -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2">
+      <div class="card-dark shadow-soft p-2 p-sm-3">
+        <img class="rounded-16" style="width:100%;height:clamp(260px, 32vw, 420px);object-fit:cover"
+             src="https://i.postimg.cc/rF44K2LH/image.jpg" alt="workspace">
+      </div>
+      <div class="card-dark shadow-soft p-4 p-lg-5">
+        <p class="text-uppercase text-muted mb-1" style="letter-spacing:.12em">About Me</p>
+        <h2 class="about-title mb-3">SUMMARY<br/>About Me</h3>
+        <p class="muted mb-4">
+          <strong>Thitaphon Tupreang</strong> — สาย <em>Project Management and Business Analysis</em> มีประสบการณ์การเก็บ Requirement, 
+          การวิเคราะห์ข้อมูล, การออกแบบ Workflow และการจัดการโครงการจริง ทั้งจากโครงการจบ กิจกรรมนักศึกษา และโครงการภายนอก
+        </p>
+        <ul class="list-unstyled mb-4">
+          <li class="mb-2"><i class="bi bi-check2-circle me-2" style="color:var(--brand)"></i>การเก็บ Requirement, การวิจัยตลาด, การวิเคราะห์ข้อมูล</li>
+          <li class="mb-2"><i class="bi bi-check2-circle me-2" style="color:var(--brand)"></i>การวางแผน Timeline & Scope, การดูแล Budget</li>
+          <li class="mb-2"><i class="bi bi-check2-circle me-2" style="color:var(--brand)"></i>Workflow & Process Design</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline-light rounded-pill px-4">Contact</a>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="resume-card">
-      <img src="https://i.postimg.cc/FRYs37hb/IMG-0323.jpg" alt="Internship">
-      <div class="resume-content">
-        <h4>Operations Support, Sticker & Clothing Shop</h4>
-          <p>Assisted with back-end tasks such as stock management and order fulfillment.</p>
-          <a href="https://www.instagram.com/griz.studio?utm_source=ig_web_button_share_sheet&igsh=ZHoyODR2bW9xbGo0" target="_blank" style="color: royalblue; text-decoration: none; display: inline-block; margin-top: 10px;">
-            📸 griz.studio</a></br>
-          <a href="https://www.instagram.com/makemelikeasticker?utm_source=ig_web_button_share_sheet&igsh=MWlzZ25yYjV1OXU5ag==" target="_blank" style="color: royalblue; text-decoration: none; display: inline-block; margin-top: 10px;">
-            📸 makemelikeasticker</a>
+<!-- 02 Skills + Stats -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card-dark shadow-soft p-4 p-lg-5 h-100">
+          <h3 class="mb-2">Our Skills</h3>
+          <p class="muted mb-4">For Project Manager (PM) and Business Analyst (BA)</p>
+          <div class="skill mb-3"><div class="label"><span>Excel / Figma</span><span>85%</span></div><div class="progress"><div class="progress-bar" style="width:85%"></div></div></div>
+          <div class="skill mb-3"><div class="label"><span>Project Planning</span><span>75%</span></div><div class="progress"><div class="progress-bar" style="width:82%"></div></div></div>
+          <div class="skill mb-3"><div class="label"><span>Requirement Gathering</span><span>75%</span></div><div class="progress"><div class="progress-bar" style="width:88%"></div></div></div>
+          <div class="skill"><div class="label"><span>Team Leadership</span><span>80%</span></div><div class="progress"><div class="progress-bar" style="width:80%"></div></div></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card-dark shadow-soft p-4 p-lg-5 h-100">
+          <div class="row row-cols-2 g-4">
+            <div class="col"><div class="fs-2 fw-bold">2+</div><div class="muted">Year Of Experience</div></div>
+            <div class="col"><div class="fs-2 fw-bold">10+</div><div class="muted">Project Done</div></div>
+            <div class="col"><div class="fs-2 fw-bold">10+</div><div class="muted">Satisfied Client</div></div>
+            <div class="col"><div class="fs-2 fw-bold">2</div><div class="muted">Certificate</div></div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="section-subtitle">Education</div>
-    <div class="resume-card">
-      <img src="https://i.postimg.cc/c4nHzXbG/images.png" alt="Education">
-      <div class="resume-content">
-        <h4>Rajinibon School</h4></br>
-        <p>2011-2022 General Education Development (Primary 1 - Secondary 6)<br>Study Arts-Mathematics (2011-2022) GPA 3.61</p></br></br></br>
-        <p>885 Samsen Road, Thanon Nakhon Chai Si Subdistrict, Dusit District, Bangkok 10300</p>
-      </div>
-    </div>
 
-    <div class="resume-card">
-      <img src="https://i.postimg.cc/SsRQfrM5/0d52a6a5-d0f5-499f-b1db-55d3ca0e2d3d.webp" alt="Education">
-      <div class="resume-content">
-        <h4>Bangkok University</h4></br>
-        <p>Faculty of Information Technology and Innovation<br>Major in Information Technology GPA 3.67</p></br>
-        <p>91 Phahonyothin Road, Khlong Nueng Subdistrict, Khlong Luang District, Pathum Thani 12120</p>
-      </div>
-    </div>
+<!-- FOOTER -->
+<footer class="pt-5 pb-4">
+  <div class="container text-center text-white-50">© 2025 Thitaphon Tupreang</div>
+</footer>
 
-    <div class="section-subtitle">Professional Skillset</div>
-    <div class="skillset-card">
-      <div class="skills-grid">
-        <div>Teamwork</div>
-        <div>Communication</div>
-        <div>Leadership</div>
-        <div>Problem Solving</div>
-        <div>Fast Learner</div>
-        <div>Responsibility</div>
-      </div>
-    </div>
-
-    <div class="section-subtitle">Languages / Skill</div>
-    <div class="skillset-card">
-      <div class="skills-grid">
-        <div>Thai (Native)</div>
-        <div>English (Fair)</div>
-        <div>HTML</div>
-        <div>CSS</div>
-        <div>JavaScript (Basic)</div>
-        <div>Adobe XD</div>
-        <div>Figma</div>
-        <div>Photoshop</div>
-        <div>Illustrator</div>
-        <div>Trello</div>
-        <div>Notion</div>
-        <div>Google Workspace</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Thitaphon Tupreang</p>
-  </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ทำเมนู active อัตโนมัติ (ใช้กับทุกหน้าได้)
+  document.addEventListener('DOMContentLoaded', function () {
+    const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    document.querySelectorAll('.navbar .nav-link').forEach(a => {
+      const href = (a.getAttribute('href') || '').toLowerCase();
+      if (href === current) a.classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
