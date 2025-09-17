@@ -20,6 +20,10 @@ a{text-decoration:none}
 .navbar .nav-link.active::after{content:"";position:absolute;left:.5rem;right:.5rem;bottom:.3rem;height:2px;background:var(--brand);border-radius:2px}
 .btn-brand{background:var(--brand);color:#0a0a0a;border:0;font-weight:700}
 .btn-brand:hover{filter:brightness(1.05)}
+.navbar-brand {
+  color: #ffffff !important; /* ขาวล้วน */
+}
+
 
 /* Sections / cards */
 .section{padding-block:64px}
